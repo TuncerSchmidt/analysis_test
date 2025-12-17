@@ -16,7 +16,7 @@ def try_analysis(symbol, exchange):
     handler = TA_Handler(
         symbol=symbol.upper(),
         screener="america",
-        exchange=exchange,
+        exchange="NASDAQ",
         interval=Interval.INTERVAL_1_DAY
     )
     return handler.get_analysis()
@@ -25,17 +25,17 @@ def try_analysis(symbol, exchange):
 def get_tv_analysis(symbol: str):
 
     # 1️⃣ Tüm borsaları sırayla dene
-    for ex in EXCHANGES:
-        try:
-            analysis = try_analysis(symbol, ex)
-            return {
-                "symbol": symbol.upper(),
-                "exchange": ex,
-                "summary": analysis.summary,
-                "indicators": analysis.indicators
-            }
-        except Exception:
-            continue  # sıradaki exchange’e geç
+    # for ex in EXCHANGES:
+    try:
+        analysis = try_analysis(symbol, ex)
+        return {
+            "symbol": symbol.upper(),
+            "exchange": ex,
+            "summary": analysis.summary,
+            "indicators": analysis.indicators
+        }
+    except Exception:
+        continue  # sıradaki exchange’e geç
 
     # 2️⃣ Eğer hepsi hata verirse → fallback: exchange=None
     try:
