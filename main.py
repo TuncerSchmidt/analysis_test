@@ -8,7 +8,7 @@ def get_tv_analysis(symbol: str):
         handler = TA_Handler(
             symbol=symbol.upper(),
             screener="america",
-            exchange="",
+            exchange=None,
             interval=Interval.INTERVAL_1_DAY
         )
 
